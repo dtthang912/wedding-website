@@ -29,11 +29,12 @@ $(document).ready(function() {
 	var magnifVideo = function() {
 		$('.popup-video').magnificPopup({
 			type: 'inline',
+			mainClass: 'mfp-video-popup',
 			inline: {
 				markup: '<div class="mfp-content-wrapper">'+
 						'<div class="mfp-close"></div>'+
 						'<div class="video-popup-container">'+
-						'<video width="100%" controls>'+
+						'<video controls>'+
 						'<source src="" type="video/mp4">'+
 						'Your browser does not support the video tag.'+
 						'</video>'+
