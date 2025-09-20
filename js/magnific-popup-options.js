@@ -27,15 +27,48 @@ $(document).ready(function() {
 	};
 
 	var magnifVideo = function() {
-		$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-        disableOn: 700,
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-
-        fixedContentPos: false
-    });
+		$('.popup-video').magnificPopup({
+			type: 'inline',
+			inline: {
+				markup: '<div class="mfp-content-wrapper">'+
+						'<div class="mfp-close"></div>'+
+						'<div class="video-popup-container">'+
+						'<video width="100%" controls>'+
+						'<source src="" type="video/mp4">'+
+						'Your browser does not support the video tag.'+
+						'</video>'+
+						'</div>'+
+						'</div>'
+			},
+			callbacks: {
+				open: function() {
+					var videoSrc = $(this.st.el).attr('href');
+					if (videoSrc) {
+						$(this.content).find('video source').attr('src', videoSrc);
+						$(this.content).find('video')[0].load();
+						$(this.content).find('video')[0].play();
+					}
+				},
+				close: function() {
+					if ($(this.content).find('video').length) {
+						$(this.content).find('video')[0].pause();
+					}
+				}
+			},
+			closeBtnInside: true,
+			closeOnContentClick: false,
+			closeOnBgClick: true,
+			showCloseBtn: true,
+			enableEscapeKey: true,
+			midClick: true,
+			mainClass: 'mfp-with-zoom',
+			removalDelay: 160,
+			preloader: false,
+			fixedContentPos: true,
+			items: {
+				src: '' // This will be replaced by elementParse callback
+			}
+		});
 	};
 
 	
